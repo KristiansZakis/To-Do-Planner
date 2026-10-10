@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner</title>
+    <link rel="stylesheet" href="/app/css/main-page.css">
+    <link rel="stylesheet" href="/app/css/tasks.css">
+    <script src="/app/js/common.js" defer></script>
+    <script src="/app/js/tasks.js" defer></script>
+</head>
+
+<body class="tasks-body">
+    <header class="tasks-head">
+        <button id="back" class="back-btn" data-i18n-title="back" title="Back">←</button>
+        <input id="title" class="title-input" maxlength="80">
+        <button id="settings-link" class="back-btn" data-i18n-title="settings" title="Settings">⚙</button>
+        <button id="exit-btn" class="back-btn logout-text" data-i18n="logout">Log out →</button>
+    </header>
+
+    <main class="page">
+        <div class="summary" id="summary"></div>
+
+        <div class="toolbar">
+            <div class="tabs">
+                <button class="tab on" data-status="all" data-i18n="all">All</button>
+                <button class="tab" data-status="active" data-i18n="tasksActive">Active</button>
+                <button class="tab" data-status="done" data-i18n="tasksDone">Done</button>
+            </div>
+            <select id="priorityFilter">
+                <option value="all" data-i18n="allPriorities">All priorities</option>
+                <option value="High" data-i18n="High">High</option>
+                <option value="Medium" data-i18n="Medium">Medium</option>
+                <option value="Low" data-i18n="Low">Low</option>
+            </select>
+            <select id="sortBy">
+                <option value="due" data-i18n="sortDue">Sort by due date</option>
+                <option value="priority" data-i18n="sortPriority">Sort by priority</option>
+            </select>
+            <button class="primary-btn" id="newTaskBtn" data-i18n="newTask">+ New task</button>
+        </div>
+
+        <form class="task-form" id="taskForm" novalidate>
+            <h3 id="formTitle"></h3>
+            <label><span data-i18n="titleLabel">Title</span><input id="fTitle" maxlength="100"></label>
+            <label><span data-i18n="descLabel">Description</span><textarea id="fDesc" maxlength="1000" rows="3"></textarea></label>
+            <label><span data-i18n="dueLabel">Due date</span><input type="date" id="fDue"></label>
+            <label><span data-i18n="priorityLabel">Priority</span>
+                <select id="fPriority">
+                    <option value="Low" data-i18n="Low">Low</option>
+                    <option value="Medium" data-i18n="Medium">Medium</option>
+                    <option value="High" data-i18n="High">High</option>
+                </select>
+            </label>
+            <label><span data-i18n="assignedTo">Assigned to</span><select id="fAssignee"></select></label>
+            <p class="form-error" id="formError"></p>
+            <div class="form-buttons">
+                <button type="submit" class="primary-btn" data-i18n="save">Save</button>
+                <button type="button" class="secondary-btn" id="cancelBtn" data-i18n="cancel">Cancel</button>
+            </div>
+        </form>
+
+        <div id="taskList"></div>
+
+        <section class="members-box">
+            <h3 data-i18n="members">Members</h3>
+            <div id="membersList"></div>
+            <form class="invite-form" id="inviteForm" novalidate hidden>
+                <input id="inviteEmail" type="email">
+                <button type="submit" class="primary-btn" data-i18n="invite">Invite</button>
+                <p class="form-error" id="inviteMessage"></p>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>

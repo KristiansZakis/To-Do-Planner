@@ -1,0 +1,6 @@
+npm install
+npm run dev      (http://localhost:8000)
+
+Pages:   /login  /register  /dashboard (#projects #create #settings #invites #profile)  /project/:id (List = task list, New/Grid = workspace)
+Existing databases are migrated automatically on start (new tables + user settings columns).
+Set SESSION_SECRET in the environment before deploying.

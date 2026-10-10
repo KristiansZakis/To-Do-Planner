@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register - To-Do Planner</title>
+    <link rel="stylesheet" href="/css/registration-login.css">
+    <script src="/js/registration.js" defer></script>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Create account</h1>
+        <p class="error" id="error"></p>
+        <form id="form">
+            <label>Name
+                <input type="text" name="name" required minlength="2" autocomplete="name">
+            </label>
+            <label>Email
+                <input type="email" name="email" required autocomplete="email">
+            </label>
+            <label>Password (min. 8 characters)
+                <input type="password" name="password" required minlength="8" autocomplete="new-password">
+            </label>
+            <button type="submit">Register</button>
+        </form>
+        <p class="hint">Already have an account? <a href="/login">Log in</a></p>
+    </div>
+
+</body>
+
+</html>

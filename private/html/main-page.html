@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner</title>
+    <link rel="stylesheet" href="/app/css/main-page.css">
+    <script src="/app/js/common.js" defer></script>
+    <script src="/app/js/main-page.js" defer></script>
+</head>
+
+<body>
+    <header class="topbar">
+        <h2 id="topbar-title"></h2>
+        <button id="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </header>
+
+    <aside class="sidepanel" id="sidepanel">
+        <div id="side-top">
+            <div class="avatar" id="avatar"></div>
+            <h1 id="userName">…</h1>
+        </div>
+        <div id="side-main">
+            <ul>
+                <li><button data-view="profile" data-i18n="profileSettings">Profile settings</button></li>
+                <li><button data-view="projects" data-i18n="projects">Projects</button></li>
+                <li><button data-view="create" data-i18n="createNew">Create New</button></li>
+                <li><button data-view="settings" data-i18n="settings">Settings</button></li>
+                <li><button data-view="invites"><span data-i18n="invites">Invites</span> <span id="invite-badge"
+                            hidden></span></button></li>
+            </ul>
+        </div>
+        <div id="logout-btn">
+            <button id="logout" data-i18n="logout">Log out →</button>
+        </div>
+    </aside>
+
+    <main class="content" id="content"></main>
+</body>
+
+</html>

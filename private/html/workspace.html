@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner</title>
+    <link rel="stylesheet" href="/app/css/workspace.css">
+    <script src="/app/js/common.js" defer></script>
+    <script src="/app/js/workspace.js" defer></script>
+</head>
+
+<body>
+    <nav class="rail" aria-label="Tools">
+        <button id="back" class="rail-btn" data-i18n-title="back" title="Back">
+            <svg viewBox="0 0 48 24">
+                <path d="M46 12H4M14 2L4 12l10 10" fill="none" stroke="currentColor" stroke-width="4"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+        <button id="shapes-btn" class="rail-btn add" data-i18n-title="shapes" title="Shapes">+</button>
+        <button id="table-btn" class="rail-btn" data-i18n-title="table" title="Table">
+            <svg viewBox="0 0 32 32">
+                <rect x="3" y="5" width="26" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <path d="M3 12h26M3 19h26M12 5v22M21 5v22" stroke="currentColor" stroke-width="2" />
+            </svg>
+        </button>
+        <button id="image-btn" class="rail-btn" data-i18n-title="image" title="Image">
+            <svg viewBox="0 0 32 32">
+                <rect x="3" y="5" width="26" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <circle cx="11" cy="13" r="2.5" fill="currentColor" />
+                <path d="M4 25l8-8 5 5 4-4 7 7" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+        <span class="grow"></span>
+        <button id="settings-link" class="rail-btn" data-i18n-title="settings" title="Settings">
+            <svg viewBox="0 0 32 32">
+                <circle cx="16" cy="16" r="4.5" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <path d="M16 3v4M16 25v4M3 16h4M25 16h4M7 7l3 3M22 22l3 3M25 7l-3 3M10 22l-3 3" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+        </button>
+        <button id="logout" class="rail-btn" data-i18n-title="logout" title="Log out">
+            <svg viewBox="0 0 32 32">
+                <path d="M13 5H6a1 1 0 0 0-1 1v20a1 1 0 0 0 1 1h7M20 10l6 6-6 6M26 16H12" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </nav>
+
+    <aside class="shapes" id="shapes-panel" hidden>
+        <h2 data-i18n="shapes">Shapes</h2>
+        <div class="shape-grid">
+            <button data-shape="rect"><svg viewBox="0 0 50 50">
+                    <rect x="3" y="3" width="44" height="44" fill="#fff" stroke="#000" stroke-width="2" />
+                </svg><span data-i18n="rectangle">Rectangle</span></button>
+            <button data-shape="triangle"><svg viewBox="0 0 50 50">
+                    <polygon points="25,3 47,47 3,47" fill="#fff" stroke="#000" stroke-width="2" />
+                </svg><span data-i18n="triangle">Triangle</span></button>
+            <button data-shape="star"><svg viewBox="0 0 50 50">
+                    <polygon points="25,3 31,19 48,19 34,30 39,46 25,36 11,46 16,30 2,19 19,19" fill="#fff"
+                        stroke="#000" stroke-width="2" stroke-linejoin="round" />
+                </svg><span data-i18n="star">Star</span></button>
+            <button data-shape="ellipse"><svg viewBox="0 0 50 50">
+                    <ellipse cx="25" cy="25" rx="22" ry="22" fill="#fff" stroke="#000" stroke-width="2" />
+                </svg><span data-i18n="ellipse">Ellipse</span></button>
+            <button data-shape="arrow"><svg viewBox="0 0 50 50">
+                    <path d="M5 40L44 10M44 10l-12 1M44 10l-5 11" fill="none" stroke="#000" stroke-width="2.5"
+                        stroke-linecap="round" />
+                </svg><span data-i18n="arrow">Arrow</span></button>
+            <button data-shape="line"><svg viewBox="0 0 50 50">
+                    <path d="M5 40L45 10" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" />
+                </svg><span data-i18n="line">Line</span></button>
+        </div>
+    </aside>
+
+    <main class="stage">
+        <header class="head">
+            <input id="title" class="title" maxlength="80" aria-label="Title">
+            <span id="status" class="status" role="status"></span>
+            <span class="grow"></span>
+            <span id="members" class="members"></span>
+            <button id="share" class="btn-share" data-i18n="share" hidden>Share</button>
+        </header>
+        <div class="canvas-wrap" id="canvas-wrap">
+            <svg id="canvas" width="3000" height="2000" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="1" cy="1" r="1.2" fill="rgba(0,0,0,.25)" />
+                    </pattern>
+                </defs>
+                <rect id="bg" width="3000" height="2000" fill="url(#dots)" />
+                <g id="objects"></g>
+                <g id="overlay"></g>
+            </svg>
+            <textarea id="editor" hidden></textarea>
+        </div>
+        <div class="toolbar" id="toolbar" role="toolbar">
+            <button data-tool="select" class="on" data-i18n-title="select" title="Select">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 3l14 8-6 1.5L10 19z" fill="#000" stroke="#000" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+            <button data-tool="pen" data-i18n-title="pen" title="Pen"><img src="/app/img/pen.png" alt="Pen"></button>
+            <button data-tool="pencil" data-i18n-title="pencil" title="Pencil"><img src="/app/img/pencil.png"
+                    alt="Pencil"></button>
+            <button data-tool="text" data-i18n-title="text" title="Text"><img src="/app/img/text.png"
+                    alt="Text"></button>
+            <span class="sep"></span>
+            <input type="color" id="color" value="#ffffff" data-i18n-title="color" title="Color">
+            <input type="number" id="size" min="1" max="96" value="4" title="Size">
+            <span class="ctx" id="ctx-table" hidden>
+                <button data-tbl="addRow">+ row</button><button data-tbl="delRow">− row</button>
+                <button data-tbl="addCol">+ col</button><button data-tbl="delCol">− col</button>
+            </span>
+            <button id="delete" class="danger" data-i18n-title="deleteSel" title="Delete selected" hidden>
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13" fill="none" stroke="#fff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </main>
+    <input type="file" id="file" accept="image/*" hidden>
+</body>
+
+</html>
