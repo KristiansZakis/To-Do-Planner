@@ -13,48 +13,48 @@ const db = new Database(path.join(__dirname, 'data', 'planner.db'));
 db.pragma('foreign_keys = ON');
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
-    id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    name          TEXT NOT NULL,
-    email         TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
-    created_at    TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    name                TEXT NOT NULL,
+    email               TEXT NOT NULL UNIQUE,
+    password_hash       TEXT NOT NULL,
+    created_at          TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   );
   CREATE TABLE IF NOT EXISTS projects (
-    id         INTEGER PRIMARY KEY AUTOINCREMENT,
-    owner_id   INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    title      TEXT NOT NULL DEFAULT 'Untitled',
-    template   TEXT NOT NULL DEFAULT 'new',
-    data       TEXT NOT NULL DEFAULT '{"objects":[]}',
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    owner_id            INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    title               TEXT NOT NULL DEFAULT 'Untitled',
+    template            TEXT NOT NULL DEFAULT 'new',
+    data                TEXT NOT NULL DEFAULT '{"objects":[]}',
+    created_at          TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at          TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   );
   CREATE TABLE IF NOT EXISTS project_members (
-    project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
-    user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    project_id          INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    user_id             INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     PRIMARY KEY (project_id, user_id)
   );
   CREATE TABLE IF NOT EXISTS invites (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    project_id  INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
-    from_user   INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    to_user     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    created_at  TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id          INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    from_user           INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    to_user             INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at          TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (project_id, to_user)
   );
 `);
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS tasks (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    project_id  INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
-    title       TEXT NOT NULL,
-    description TEXT NOT NULL DEFAULT '',
-    due_date    TEXT,
-    priority    TEXT NOT NULL DEFAULT 'Medium',
-    done        INTEGER NOT NULL DEFAULT 0,
-    creator_id  INTEGER REFERENCES users(id) ON DELETE SET NULL,
-    assignee_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
-    created_at  TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id          INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    title               TEXT NOT NULL,
+    description         TEXT NOT NULL DEFAULT '',
+    due_date            TEXT,
+    priority            TEXT NOT NULL DEFAULT 'Medium',
+    done                INTEGER NOT NULL DEFAULT 0,
+    creator_id          INTEGER REFERENCES users(id) ON DELETE SET NULL,
+    assignee_id         INTEGER REFERENCES users(id) ON DELETE SET NULL,
+    created_at          TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   );
 `);
 
@@ -136,7 +136,7 @@ app.post('/api/register', async (req, res) => {
     if (invalid) return res.status(400).json({ error: invalid });
 
     try {
-        const hash = await bcrypt.hash(password, 12);
+        const hash = await bcrypt.hash(password, 12);   //password hash
         const result = db
             .prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)')
             .run(name, email, hash);
