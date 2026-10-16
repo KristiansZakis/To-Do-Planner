@@ -60,7 +60,7 @@ const views = {
             <h2 class="page-title">${esc(App.t('templates'))}</h2>
             <div class="tiles">
                 ${templateTile('new', 'tplNew', '<span>+</span>')}
-                ${templateTile('list', 'tplList', listPreview())}
+                ${templateTile('list', 'tplList', listPreview())}   
                 ${templateTile('grid', 'tplGrid', gridPreview())}
             </div>`;
         $content.querySelectorAll('[data-template]').forEach((b) => b.addEventListener('click', async () => {
@@ -203,14 +203,35 @@ const views = {
 };
 
 function listPreview() {
-    return '<svg viewBox="0 0 102 102"><g stroke="#000" stroke-width="2"><line x1="0" y1="22" x2="102" y2="22"/><line x1="0" y1="40" x2="102" y2="40"/><line x1="0" y1="60" x2="102" y2="60"/><line x1="0" y1="78" x2="102" y2="78"/></g></svg>';
+    return `
+        <svg viewBox="0 0 102 102">
+            <g stroke="#000" stroke-width="2" fill="none">
+                <line x1="0" y1="22" x2="102" y2="22"/>
+                <line x1="0" y1="40" x2="102" y2="40"/>
+                <line x1="0" y1="60" x2="102" y2="60"/>
+                <line x1="0" y1="78" x2="102" y2="78"/>
+            </g>
+        </svg>
+`;
 }
 function gridPreview() {
-    return '<svg viewBox="0 0 102 102"><rect x="12" y="14" width="22" height="22" fill="#d9d9d9"/><rect x="62" y="30" width="26" height="30" fill="#7e2424"/><rect x="12" y="52" width="38" height="28" fill="#18be4f"/><path d="M26 18 L58 28 M44 68 L84 76" stroke="#000" stroke-width="2" fill="none"/></svg>';
+    return `
+        <svg viewBox="0 0 102 102">
+            <rect x="12" y="14" width="22" height="22" fill="#d9d9d9" stroke="#000000" stroke-width="2" />
+            <rect x="62" y="30" width="26" height="30" fill="#7e2424" stroke="#000000" stroke-width="2" />
+            <rect x="12" y="52" width="38" height="28" fill="#18be4f" stroke="#000000" stroke-width="2" />
+            <path d="M34 20 L70 30 M50 70 L70 60" stroke="#ff0202" stroke-width="3" fill="none"/>
+        </svg>
+`;
 }
+
 function templateTile(key, labelKey, inner) {
-    return `<div class="tile-wrap"><button class="tile tpl-${key}" data-template="${key}" aria-label="${esc(App.t(labelKey))}">${inner}</button>
-        <div class="tile-label">${esc(App.t(labelKey))}</div></div>`;
+    return `<div class="tile-wrap">
+                <button class="tile tpl-${key}" data-template="${key}" aria-label="${esc(App.t(labelKey))}">${inner}</button>
+                <div class="tile-label">
+                    ${esc(App.t(labelKey))}
+                </div>
+            </div>`;
 }
 
 function fillTiles(box, items, emptyKey) {
@@ -222,7 +243,9 @@ function fillTiles(box, items, emptyKey) {
                 ${!p.is_owner ? `<span class="badge-shared">${esc(p.owner_name)}</span>` : ''}
             </button>
             <button class="tile-menu" aria-label="Menu" data-menu>⋯</button>
-            <div class="tile-label">${esc(p.title)}</div>
+            <div class="tile-label">
+                ${esc(p.title)}
+            </div>
         </div>`).join('');
 }
 

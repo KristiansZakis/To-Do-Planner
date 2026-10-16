@@ -128,6 +128,7 @@
     background: var(--accent);
     padding: 9px 18px;
     font-size: 1rem;
+    padding-bottom: 10px;
 }
 
 .secondary-btn {
@@ -219,7 +220,7 @@
 }
 
 [data-theme="dark"] .task-card {
-    background: #4d4d4d;
+    background: #ffffff;
     color: #fff;
 }
 
@@ -302,7 +303,7 @@
 }
 
 [data-theme="dark"] .members-box {
-    background: #4d4d4d;
+    background: s#c0c0c0;
     color: #fff;
 }
 

@@ -23,9 +23,9 @@
     --bg-active: #c4bbbb;
     --fg: #1b1b1b;
     --line: #1b1b1b;
-    --tile: #3b3b3b;
+    --tile: #f8f0f0;
     --tile-fg: #ffffff;
-    --panel: #3b3b3b;
+    --panel: #cecdcd;
     --panel-fg: #ffffff;
     --pill: #6d6666;
     --row: #cbbdbd;
@@ -221,6 +221,7 @@ button.active #invite-badge {
     width: 6.4rem;
     height: 6.4rem;
     border-radius: 24px;
+    border: solid black 3px;
     background: var(--tile);
     border: 0;
     cursor: pointer;
@@ -321,6 +322,8 @@ button.active #invite-badge {
     place-items: center;
     font-size: 3rem;
     color: #333;
+    border: solid black 3px;
+    padding-bottom: 15px;
 }
 
 .tile.tpl-grid svg,
@@ -329,6 +332,8 @@ button.active #invite-badge {
     inset: 0;
     width: 100%;
     height: 100%;
+    border: solid black 3px;
+    border-radius: 24px;
 }
 
 .badge-shared {
@@ -337,7 +342,7 @@ button.active #invite-badge {
     bottom: 6px;
     font-size: .7rem;
     background: rgba(0, 0, 0, .6);
-    color: #fff;
+    color: #ffffff;
     border-radius: 8px;
     padding: 1px 6px;
 }
@@ -364,7 +369,7 @@ button.active #invite-badge {
 }
 
 :root[data-theme="light"] .setting-row {
-    color: #1b1b1b;
+    color: #f4f1f1;
 }
 
 .seg {
@@ -425,7 +430,7 @@ button.active #invite-badge {
 }
 
 :root[data-theme="light"] .invite-row {
-    color: #1b1b1b;
+    color: #ede9e9;
 }
 
 .invite-row.empty {

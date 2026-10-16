@@ -66,7 +66,10 @@ button {
     display: grid;
     place-items: center;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
+
 
 .rail-btn svg {
     width: 36px;
@@ -87,8 +90,9 @@ button {
 }
 
 .rail-btn.add {
-    font-size: 2.2rem;
     line-height: 1;
+    font-size: 60px;
+    padding-bottom: 15px;
 }
 
 .rail-btn.add::before {
@@ -369,6 +373,7 @@ button {
 
     .rail-btn {
         height: 56px;
+        padding-top: 5px;
     }
 
     .rail-btn svg {
